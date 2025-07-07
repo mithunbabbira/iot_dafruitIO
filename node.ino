@@ -14,8 +14,8 @@ const int servoPin = D5;  // Use D5 (GPIO 14) for MG996R signal line
 const int stopPosition = 90;  // Stop position (~1500µs, calibrate if needed)
 const int speedCW = 70;  // Slower clockwise speed (was 0 for full speed)
 const int speedCCW = 180;  // Full speed counterclockwise (max torque, ~2400µs)
-const int rotationTime = 500;  // Rotation time (1 second = 1000ms)
-const int pauseTime = 500;  // Pause time (1 second = 1000ms)
+const int rotationTime = 250;  // Rotation time (1 second = 1000ms)
+const int pauseTime = 400;  // Pause time (1 second = 1000ms)
 
 // Button configuration
 const int buttonPin = D6;  // Button connected to D6 (GPIO 12)
@@ -199,7 +199,7 @@ void updateSprayCycle() {
       break;
       
     case 3:  // Counterclockwise rotation - run for 1 second automatically
-      if (elapsed >= 500) {  // Run for exactly 1 second
+      if (elapsed >= rotationTime) {  // Run for exactly 1 second
         myServo.write(stopPosition);
         Serial.println("1 second complete! Stopped counterclockwise, pulse: " + String(myServo.readMicroseconds()) + "µs");
         sprayStep = 4;
